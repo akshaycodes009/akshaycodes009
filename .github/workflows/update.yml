@@ -1,0 +1,38 @@
+name: Auto Update Profile README
+
+on:
+  schedule:
+    # 6 AM IST = 00:30 UTC
+    - cron: "30 0 * * *"
+
+    # 9 PM IST = 15:30 UTC
+    - cron: "30 15 * * *"
+
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install Dependencies
+        run: pip install pytz
+
+      - name: Run Script
+        run: python update_readme.py
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "akshaycodes009"
+          git config --global user.email "YOUR_GITHUB_EMAIL"
+          git add .
+          git commit -m "🔄 Auto update README"
+          git push
