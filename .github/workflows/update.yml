@@ -32,7 +32,7 @@ jobs:
       - name: Commit and Push
         run: |
           git config --global user.name "akshaycodes009"
-          git config --global user.email "YOUR_GITHUB_EMAIL"
+          git config --global user.email "akshaycse0@gmail.com"
           git add .
           git commit -m "🔄 Auto update README"
           git push
