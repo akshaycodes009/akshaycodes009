@@ -2,13 +2,15 @@ name: Auto Update Profile README
 
 on:
   schedule:
-    # 6 AM IST = 00:30 UTC
+    # 6:00 AM IST (00:30 UTC)
     - cron: "30 0 * * *"
-
-    # 9 PM IST = 15:30 UTC
+    # 9:00 PM IST (15:30 UTC)
     - cron: "30 15 * * *"
-
   workflow_dispatch:
+
+# 🔥 IMPORTANT — push permission fix
+permissions:
+  contents: write
 
 jobs:
   update:
@@ -34,5 +36,6 @@ jobs:
           git config --global user.name "akshaycodes009"
           git config --global user.email "akshaycse0@gmail.com"
           git add .
-          git commit -m "🔄 Auto update README"
+          git diff --cached --quiet || git commit -m "🔄 Auto update README"
+          git push          git commit -m "🔄 Auto update README"
           git push
